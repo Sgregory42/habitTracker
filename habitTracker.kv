@@ -1,0 +1,149 @@
+<MyBoxLayout>:
+
+<headerBoxLayout@BoxLayout>:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            # self here refers to the widget i.e BoxLayout
+            pos: self.pos
+            size: self.size
+    canvas.after:
+        Color:
+            rgba: 0,0,0,1
+        Line:
+            width: 3
+            rectangle: self.x, self.y, self.width, self.height
+
+<bodyGridLayout@GridLayout>:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            # self here refers to the widget i.e BoxLayout
+            pos: self.pos
+            size: self.size
+
+
+<fillerLabel@Label>:
+    canvas:
+        Color:
+            rgba: 0,0,0,1
+        Line:
+            width: 3
+            rectangle: self.x, self.y, self.width, self.height
+
+<todayButton@Button>:
+    background_down: ''
+    background_normal: ''
+
+<BorderButton@ToggleButton>:
+    text: 'Hello'
+    color: (0,0,0,1)
+    text_size: self.size
+    halign: 'right'
+    valign: 'top'
+    padding: (10, 10)
+    background_down: ''
+    background_normal: ''
+    canvas.after:
+        Color:
+            rgba: 1, 0, 0, 1
+        Line:
+            width: 3
+            rectangle: self.x, self.y, self.width, self.height
+
+<SideButton@BoxLayout>:
+    id: sideButtonID
+    orientation: 'horizontal'
+    valign: 'center'
+    genID: root.genID
+    sideButtonColor: root.sideButtonColor
+    canvas.before:
+        Color:
+            rgba: root.sideButtonColor
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    FloatLayout:
+        size_hint: (0.7,1)
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            TextInput:
+                size_hint: (1, None)
+                height: '35sp'
+                font_size: '20sp'
+                hint_text: 'New Task'
+                multiline: False
+                background_color: (0,0,0,0)
+                padding: (10, 10)
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: 'Streak: '
+                    color: 0,0,0,1
+                    size: self.texture_size
+                    text_size: self.size
+                    padding: (10, 0)
+                    halign: 'left'
+                    valign: 'center'
+                Label:
+                    id: streakTextID
+                    text: str(root.currentStreakCounter)
+                    color: 0,0,0,1
+                    halign: 'left'
+                    valign: 'center'
+                    padding: (10, 0)
+                    size: self.texture_size
+                    text_size: self.size
+            Label:
+                text: root.SelectedOrNot
+                color: 0,0,0,1
+                halign: 'left'
+                valign: 'center'
+                text_size: self.size
+                size: self.texture_size
+                padding: (10, 0)
+    FloatLayout:
+        size_hint: (0.3,1)
+        CheckBox:
+            id: checkboxID
+            group: 'dog'
+            size: min(root.size), min(root.size)
+            size_hint: None, None
+            pos_hint: {'center_x': .5, 'center_y': .5}
+
+<OtherButton@ToggleButton>:
+    # on_press: root.otherButtonMethod()
+    background_normal: ''
+    background_down: ''
+    background_color: (1, 1, 1, 1)
+    id: otherButtonId
+    color_borders: (0, 0, 0, 1)
+    text: '25'
+    color: (0, 0, 0, 1)
+    text_size: self.size
+    halign: 'right'
+    valign: 'top'
+    padding: (10, 10)
+    allow_no_selection: False
+    on_state: 
+        if self.state == 'down': self.color_borders = (1,0,0,1)
+        if self.state == 'normal': self.color_borders = (0,0,0,0)
+    canvas.before:
+        Color:
+            rgba: 0,0,0,1
+        Line:
+            width: 3
+            rectangle: self.x, self.y, self.width, self.height
+    canvas.after:
+        Color:
+            rgba: self.color_borders
+        Line:
+            width: 3
+            rectangle: self.x, self.y, self.width, self.height
+
+<Widget>:
+    font_name: 'Tahoma'
+    
