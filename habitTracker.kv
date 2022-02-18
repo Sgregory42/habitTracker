@@ -1,13 +1,6 @@
 <MyBoxLayout>:
 
 <headerBoxLayout@BoxLayout>:
-    canvas.before:
-        Color:
-            rgba: 1, 1, 1, 1
-        Rectangle:
-            # self here refers to the widget i.e BoxLayout
-            pos: self.pos
-            size: self.size
     canvas.after:
         Color:
             rgba: 0,0,0,1
@@ -36,6 +29,15 @@
 <todayButton@Button>:
     background_down: ''
     background_normal: ''
+    color: 0,0,0,1
+    canvas.before:
+        Color:
+            rgba: 0, 1, 1, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+
+
 
 <BorderButton@ToggleButton>:
     text: 'Hello'

@@ -27,6 +27,7 @@ from kivy.uix.checkbox import CheckBox
 Window.left = -1000
 Window.top = 50
 Window.size = (800,600)
+Window.clearcolor = (1, 1, 1, 1)
 
 class DatePicker(BoxLayout):
     chosenColor = [1,1,1,1]
@@ -71,13 +72,13 @@ class DatePicker(BoxLayout):
         next_month = Button(text = ">", on_press = self.move_next_month, size_hint = (0.2,1), font_size = '30sp', background_down = '', background_normal = '', color = [0,0,0])
         month_year_text = str(self.date.day) +' '+ self.month_names[self.date.month -1] + ' ' + str(self.date.year)
         current_month = Label(text=month_year_text, size_hint = (0.6, 1), color = [0,0,0], font_size = '20sp')
-        todayButton = Button(text='Today', size_hint = (0.2,1), on_press = self.todayButtonMethod)
+        headerTodayButton = todayButton(text='Today', size_hint = (0.2,1), on_press = self.todayButtonMethod)
 
         current_month.bold = True
 
         self.header.add_widget(previous_month)
         self.header.add_widget(current_month)
-        self.header.add_widget(todayButton)
+        self.header.add_widget(headerTodayButton)
         self.header.add_widget(next_month)
 
     def populate_body(self, *args, **kwargs):
@@ -266,7 +267,6 @@ class DatePicker(BoxLayout):
         MyBoxLayout.sm.current = str('screenname'+date.today().strftime('%Y-%m'))
         
 
-
 class MyBoxLayout(BoxLayout):
     chosenColor = [1,1,1,1]
     sm = ScreenManager(size_hint = (0.7,1), transition = NoTransition())
@@ -339,6 +339,9 @@ class bodyGridLayout(GridLayout):
     pass
 
 class fillerLabel(Label):
+    pass
+
+class todayButton(Button):
     pass
 
 class OtherButton(ToggleButton):
