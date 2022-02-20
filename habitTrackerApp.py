@@ -59,7 +59,7 @@ class DatePicker(BoxLayout):
             self.month_names = kwargs['month_names']
         self.header = headerBoxLayout(orientation = 'horizontal', size_hint = (1, 0.1))
 
-        self.body = bodyGridLayout(cols = 7)
+        self.body = bodyGridLayout(cols = 7, spacing = 3)
         self.add_widget(self.header)
         self.add_widget(self.body)
 
@@ -72,7 +72,7 @@ class DatePicker(BoxLayout):
         next_month = Button(text = ">", on_press = self.move_next_month, size_hint = (0.2,1), font_size = '30sp', background_down = '', background_normal = '', color = [0,0,0])
         month_year_text = str(self.date.day) +' '+ self.month_names[self.date.month -1] + ' ' + str(self.date.year)
         current_month = Label(text=month_year_text, size_hint = (0.6, 1), color = [0,0,0], font_size = '20sp')
-        headerTodayButton = todayButton(text='Today', size_hint = (0.2,1), on_press = self.todayButtonMethod)
+        headerTodayButton = RoundedButton(text='Today', size_hint = (0.2,0.8), pos_hint = {'center_y': .5}, on_press = self.todayButtonMethod)
 
         current_month.bold = True
 
@@ -166,16 +166,21 @@ class DatePicker(BoxLayout):
             print('color is: ' + str(MyBoxLayout.chosenColor))
             widget.background_color = MyBoxLayout.chosenColor
 
-        #Bookmark 25.01.2022: find out why the label text isn't updating automatically.
         counter = 0
         for dates in reversed(MyBoxLayout.buttonList[:MyBoxLayout.buttonList.index(MyBoxLayout.TheTodayButton)+1]):
             if dates.otherButtonID == date.today() and dates.background_color != MyBoxLayout.chosenColor:
                 continue
             elif dates.background_color == MyBoxLayout.chosenColor:
                 counter += 1
-                MyBoxLayout.currentSideButton.currentStreakCounter = counter
+                if MyBoxLayout.currentSideButton == '':
+                    pass
+                else:
+                    MyBoxLayout.currentSideButton.currentStreakCounter = counter
             else:
-                MyBoxLayout.currentSideButton.currentStreakCounter = counter
+                if MyBoxLayout.currentSideButton == '':
+                    pass
+                else:
+                    MyBoxLayout.currentSideButton.currentStreakCounter = counter
                 break
             print(dates.otherButtonID)
 
@@ -286,7 +291,7 @@ class MyBoxLayout(BoxLayout):
             }
     buttonList = []
     TheTodayButton = ''
-    currentSideButton = ObjectProperty()
+    currentSideButton = ''
 
     def __init__(self, **kwargs):
         super(MyBoxLayout, self).__init__(**kwargs)
@@ -303,11 +308,14 @@ class MyBoxLayout(BoxLayout):
             btn1.genID = values[1]
             btn1.sideButtonColor = values[0]
             btn1.originalColor = values[0]
-            rightLayout.add_widget(btn1)
-            #Bookmark 8 Feb 2022. Work out why currentSideButton is apparently empty when the app is initialised
             if key == "red":
                 self.currentSideButton = btn1
-                print(self.currentSideButton)
+                print('we got into red!' + str(self.currentSideButton))
+            rightLayout.add_widget(btn1)
+            #Bookmark 8 Feb 2022. Work out why currentSideButton is apparently empty when the app is initialised
+            #Bookmark 18 Feb 2022. There is still apparently some issue with currentSideButton
+            #Bookmark 18 Feb 2022. Next make the sidebar look good, and then post a picture in readme. Important functionality missing is that clicking on sidebuttons does not
+            #save the state of the streaks
         
         self.initialScreen.add_widget(DatePicker())
         self.initialScreen.bind(on_enter = self.AnotherScreenEnterMethod)
@@ -341,7 +349,9 @@ class bodyGridLayout(GridLayout):
 class fillerLabel(Label):
     pass
 
-class todayButton(Button):
+
+
+class RoundedButton(Button):
     pass
 
 class OtherButton(ToggleButton):
