@@ -462,10 +462,4 @@ Comments on the project:
     # do your job
     del l
 
-Flowchart for previous button
-- Click Back button
-- Create new screen (if we have to, or load the previous one if it exists already)
-- work out the new dates and stuff
-- create a new datepicker object, using the new dates
-
 '''
