@@ -17,7 +17,6 @@
             pos: self.pos
             size: self.size
 
-
 <fillerLabel@Label>:
     canvas:
         Color:
@@ -42,6 +41,17 @@
         Line:
             width: 3
             rectangle: self.x, self.y, self.width, self.height
+
+<AddButton@Button>:
+    text: '+ Add Habit'
+    color: (0,0,0,1)
+    text_size: self.size
+    halign: 'left'
+    valign: 'center'
+    padding: (10, 10)
+    background_down: ''
+    background_normal: ''
+    background_color: (0,0,0,0)
 
 <SideButton@BoxLayout>:
     id: sideButtonID
@@ -103,8 +113,6 @@
             size: min(root.size), min(root.size)
             size_hint: None, None
             pos_hint: {'center_x': .5, 'center_y': .5}
-
-
 
 
 <OtherButton@ToggleButton>:

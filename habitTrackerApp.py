@@ -1,4 +1,3 @@
-from curses.textpad import rectangle
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
@@ -99,7 +98,7 @@ class DatePicker(BoxLayout):
         while date_cursor.month == self.date.month:
             date_label = OtherButton(group = 'cat')
             date_label.otherButtonID = date_cursor
-            date_label.text = str(date_label.otherButtonID)
+            date_label.text = str(date_cursor.day)
             date_label.bind(on_press=partial(self.set_date, day=date_cursor.day))
             date_label.bind(state=callback)
             if date_cursor == date.today():
@@ -280,11 +279,11 @@ class MyBoxLayout(BoxLayout):
     screenDict[date.today().strftime('%Y-%m')] = initialScreen
     theEverywhereDate = ''
     colorDict = {
-            "red": [(21/255,76/255,1,0.6),'Push Ups'],
-            "green": [(0,1,0,1),'Get Milk'],
-            "blue": [(0,0,1,1),'Sing Song'],
-            "pink": [(1,1,0,1),'Sit Ups'],
-            "orange": [(0,1,1,1),'Sleeping'],
+            "blue": [(138/255,166/255,1,1),'Push Ups'],
+            "green": [(172/255,1,181/255,1),'Get Milk'],
+            "red": [(1,166/255,136/255,1),'Sing Song'],
+            "pink": [(1,174/255,236/255,1),'Sit Ups'],
+            "orange": [(1,204/255,139/255,1),'Sleeping'],
             "5": [(1,0,1,1),'Jumping'],
             "white": [(1,1,1,1),'Stretching'],
             "gridBlue": [(0.082,0.298,1,0.6),'Eat Vegetables']
@@ -298,28 +297,22 @@ class MyBoxLayout(BoxLayout):
         self.r_smash()
         
     def r_smash(self):
-        def changeColor(self):
-            MyBoxLayout.chosenColor = self.background_color
-            print("This is chosenColor inside the changeColor" + str(MyBoxLayout.chosenColor))
 
         rightLayout = GridLayout(size_hint = (0.2,1), rows = 7)
 
         with rightLayout.canvas.after:
-            Color(0, 0, 0, 1)  # green; colors range from 0-1 not 0-255
+            Color(0, 0, 0, 1)
             self.rect = Line(width = 2, rectangle = (self.x, self.y, self.width, self.height))
 
         def _update_rect(instance, value):
             self.rect.rectangle = (instance.x, instance.y, instance.width, instance.height)
-            # self.rect.size = instance.size
 
         rightLayout.bind(size=_update_rect)
         
-
-#Bookmark 21/02/2022 this is breaking
         btn1 = SideButton(size = ('200dp','100dp'), size_hint = (1, None))
-        btn1.genID = 'red'
-        btn1.sideButtonColor = self.colorDict.get('red')[0]
-        btn1.originalColor = self.colorDict.get('red')[0]
+        btn1.genID = 'blue'
+        btn1.sideButtonColor = self.colorDict.get('blue')[0]
+        btn1.originalColor = self.colorDict.get('blue')[0]
         self.currentSideButton = btn1
 
         btn2 = SideButton(size = ('200dp','100dp'), size_hint = (1, None))
@@ -328,9 +321,9 @@ class MyBoxLayout(BoxLayout):
         btn2.originalColor = self.colorDict.get('green')[0]
 
         btn3 = SideButton(size = ('200dp','100dp'), size_hint = (1, None))
-        btn3.genID = 'blue'
-        btn3.sideButtonColor = self.colorDict.get('blue')[0]
-        btn3.originalColor = self.colorDict.get('blue')[0]
+        btn3.genID = 'red'
+        btn3.sideButtonColor = self.colorDict.get('red')[0]
+        btn3.originalColor = self.colorDict.get('red')[0]
 
         btn4 = SideButton(size = ('200dp','100dp'), size_hint = (1, None))
         btn4.genID = 'pink'
@@ -342,15 +335,14 @@ class MyBoxLayout(BoxLayout):
         btn5.sideButtonColor = self.colorDict.get('orange')[0]
         btn5.originalColor = self.colorDict.get('orange')[0]
 
+        addButton = AddButton(size = ('200dp','100dp'), size_hint = (1, None), font_size = '20dp')
     
         rightLayout.add_widget(btn1)
         rightLayout.add_widget(btn2)
         rightLayout.add_widget(btn3)
         rightLayout.add_widget(btn4)
         rightLayout.add_widget(btn5)
-        # rightLayout.add_widget(topBoxLayout)
-        # rightLayout.add_widget(addButton)
-
+        rightLayout.add_widget(addButton)
 
         # this is the old iteration to get all the different coloured buttons into the sidebar
         # for key, values in self.colorDict.items():
@@ -363,9 +355,8 @@ class MyBoxLayout(BoxLayout):
         #         print('we got into red!' + str(self.currentSideButton))
         #     rightLayout.add_widget(btn1)
 
-            #Bookmark 8 Feb 2022. Work out why currentSideButton is apparently empty when the app is initialised
             #Bookmark 18 Feb 2022. There is still apparently some issue with currentSideButton
-            #Bookmark 18 Feb 2022. Next make the sidebar look good, and then post a picture in readme. Important functionality missing is that clicking on sidebuttons does not
+            #Bookmark 18 Feb 2022. Important functionality missing is that clicking on sidebuttons does not
             #save the state of the streaks
         
         self.initialScreen.add_widget(DatePicker())
@@ -399,10 +390,8 @@ class bodyGridLayout(GridLayout):
 class fillerLabel(Label):
     pass
 
-class tempBoxLayout(BoxLayout):
+class AddButton(Button):
     pass
-
-
 
 class RoundedButton(Button):
     pass
