@@ -35,8 +35,6 @@ class DatePicker(BoxLayout):
 
     def __init__(self, *args, **kwargs):
         super(DatePicker, self).__init__(**kwargs)
-        print('The Datepicker is being initialised')
-        print('carrot' + str(MyBoxLayout.theEverywhereDate))
         if MyBoxLayout.theEverywhereDate == '':
             self.date = date.today()
         else:
@@ -344,20 +342,6 @@ class MyBoxLayout(BoxLayout):
         rightLayout.add_widget(btn5)
         rightLayout.add_widget(addButton)
 
-        # this is the old iteration to get all the different coloured buttons into the sidebar
-        # for key, values in self.colorDict.items():
-        #     btn1 = SideButton()
-        #     btn1.genID = values[1]
-        #     btn1.sideButtonColor = values[0]
-        #     btn1.originalColor = values[0]
-        #     if key == "red":
-        #         self.currentSideButton = btn1
-        #         print('we got into red!' + str(self.currentSideButton))
-        #     rightLayout.add_widget(btn1)
-
-            #Bookmark 18 Feb 2022. There is still apparently some issue with currentSideButton
-            #Bookmark 18 Feb 2022. Important functionality missing is that clicking on sidebuttons does not
-            #save the state of the streaks
         
         self.initialScreen.add_widget(DatePicker())
         self.initialScreen.bind(on_enter = self.AnotherScreenEnterMethod)
@@ -402,21 +386,6 @@ class OtherButton(ToggleButton):
     otherButtonID = ''
     ticked = 0
 
-    def otherButtonMethod(self):
-        pass
-        # if self.thisIsToday == 1:
-        #     if self.state == "down":
-        #         self.color = (1,0,0,1)
-        #         self.borderColor = (1,0,0,1)
-        #         self.color_borders = self.borderColor
-        #         buttonBackgroundColor = (0,1,0,1)
-        #         self.background_color = buttonBackgroundColor
-            # if self.state == "normal":
-            #     self.color = (0,0,0,1)
-            #     self.borderColor = (0,0,0,1)
-            #     self.color_borders = self.borderColor
-            #     buttonBackgroundColor = (1,1,1,1)
-            #     self.background_color = buttonBackgroundColor
 
 class SideButton(BoxLayout):
     sideButtonColor = ListProperty([0, 1, 1, 1])
@@ -455,6 +424,10 @@ Comments on the project:
 - create a new screen, create a new datepicker object for the screen with the correct date, use a dictionary to check whether the screen exists already and if so load it, then use a created date id for the buttons to check for ticked or not. I think that might be it
 - this might be useful for getting all the togglebuttons: static get_widgets(groupname) 
     Return a list of the widgets contained in a specific group. If the group doesn’t exist, an empty list will be returned.
+
+    #Bookmark 18 Feb 2022. There is still apparently some issue with currentSideButton
+            #Bookmark 18 Feb 2022. Important functionality missing is that clicking on sidebuttons does not
+            #save the state of the streaks
 
     Note
     Always release the result of this method! Holding a reference to any of these widgets can prevent them from being garbage collected. If in doubt, do:
