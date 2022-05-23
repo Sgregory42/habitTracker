@@ -154,9 +154,9 @@ class DatePicker(BoxLayout):
         
         self.populate_header()
 
-        print('we are in set_date method')
         print(widget.background_color)
         print(MyBoxLayout.chosenColor)
+
         if widget.background_color == MyBoxLayout.chosenColor:
             print('we are in white color')
             widget.background_color = [1,1,1,1]
