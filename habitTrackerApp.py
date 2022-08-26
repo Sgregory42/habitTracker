@@ -13,7 +13,7 @@ from random import random
 from datetime import date, timedelta, datetime
 
 from functools import partial
-
+ 
 import calendar
 from kivy.clock import Clock
 from kivy.uix.screenmanager import NoTransition, ScreenManager, Screen
@@ -28,7 +28,7 @@ from kivy.uix.checkbox import CheckBox
 Window.top = 50
 Window.size = (800,600)
 Window.clearcolor = (1, 1, 1, 1)
-
+ 
 class DatePicker(BoxLayout):
     chosenColor = [1,1,1,1]
     date = date.today()
@@ -63,7 +63,7 @@ class DatePicker(BoxLayout):
 
         self.populate_body()
         self.populate_header()
-
+ 
     def populate_header(self, *args, **kwargs):
         self.header.clear_widgets()
         previous_month = Button(text = "<", on_press = self.move_previous_month, size_hint = (0.2,1), font_size = '30sp', background_down = '', background_normal = '', color = [0,0,0])
@@ -148,7 +148,7 @@ class DatePicker(BoxLayout):
         
         # Clock.schedule_once(my_callback)
 
-
+ 
     def set_date(self, widget, *args, **kwargs):
         self.date = date(self.date.year, self.date.month, kwargs['day'])
         
@@ -219,7 +219,7 @@ class DatePicker(BoxLayout):
             print(MyBoxLayout.sm.current)
             print('adding new screen name: ' + str(screenName))
         
-
+ 
     def move_previous_month(self, *args, **kwargs):
         print('PrevButton',self.date)
         if self.date.month == 1:
@@ -268,7 +268,7 @@ class DatePicker(BoxLayout):
     def todayButtonMethod(self, *args, **kwargs):
         MyBoxLayout.sm.current = str('screenname'+date.today().strftime('%Y-%m'))
         
-
+ 
 class MyBoxLayout(BoxLayout):
     chosenColor = [1,1,1,1]
     sm = ScreenManager(size_hint = (0.7,1), transition = NoTransition())
@@ -293,7 +293,7 @@ class MyBoxLayout(BoxLayout):
     def __init__(self, **kwargs):
         super(MyBoxLayout, self).__init__(**kwargs)
         self.r_smash()
-        
+         
     def r_smash(self):
 
         rightLayout = GridLayout(size_hint = (0.2,1), rows = 7)
@@ -361,7 +361,7 @@ class MyBoxLayout(BoxLayout):
                     if str(MyBoxLayout.theEverywhereDate.day) == btn.text:
                         btn.state = 'down'
         
-
+ 
 class BorderButton(ToggleButton):
     pass
 
@@ -379,14 +379,14 @@ class AddButton(Button):
 
 class RoundedButton(Button):
     pass
-
+ 
 class OtherButton(ToggleButton):
     borderColor = (0,0,0,0)
     buttonBackgroundColor = (1,1,1,1)
     otherButtonID = ''
     ticked = 0
 
-
+ 
 class SideButton(BoxLayout):
     sideButtonColor = ListProperty([0, 1, 1, 1])
     currentStreakCounter = NumericProperty(0)
@@ -405,7 +405,7 @@ class SideButton(BoxLayout):
                 MyBoxLayout.currentSideButton.SelectedOrNot = ''
         
         self.ids.checkboxID.bind(active=on_checkbox_active)
-        
+         
 class habitTrackerApp(App):
 
     def build(self):
@@ -413,7 +413,7 @@ class habitTrackerApp(App):
         return root_widget
 
 habitTrackerApp().run()
-
+ 
 '''
 Comments on the project:
 - when dynamically creating widgets i can put them in a list or dictionary or something so I can reference them later
