@@ -5,7 +5,7 @@ from kivy.uix.label import Label
 from kivy.uix.slider import Slider
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.gridlayout import GridLayout
-
+ 
 from kivy.uix.widget import Widget
 from kivy.graphics import Rectangle, Color, Line
 
